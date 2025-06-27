@@ -1,11 +1,14 @@
 import { useState } from "react";
+import BtnCaptureAudio from "./components/buttons/BtnCaptureAudio/BtnCaptureAudio.jsx";
 import "./App.css";
 
 function App() {
 
   return (
     <>
-      <p>Hello world</p>
+      <BtnCaptureAudio>
+        Record
+      </BtnCaptureAudio>
     </>
   )
 };

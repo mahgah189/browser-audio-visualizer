@@ -1,8 +1,14 @@
 import React from "react";
 import "./BtnCaptureAudio.css";
 
-function BtnCaptureAudio() {
-  const toggleTabAudioCapture = async(tab) => {
+function BtnCaptureAudio(props) {
+  const [record, toggleRecord] = React.useState(false);
+
+  React.useEffect(() => {
+    toggleTabAudioCapture();
+  }, [record]);
+
+  const toggleTabAudioCapture = async (tab) => {
     // check contexts for an offscreen document
     const existingContexts = await chrome.runtime.getContexts();
     let recording = false;
@@ -42,8 +48,12 @@ function BtnCaptureAudio() {
   };
   
   return (
-    <button>
-      
+    <button
+      onClick={() => {
+        toggleRecord(!record);
+      }}
+    >
+      {props.children}
     </button>
   )
 };
