@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import './App.css'
+import { useState } from "react";
+import "./App.css";
 
 function App() {
 
@@ -8,6 +8,6 @@ function App() {
       <p>Hello world</p>
     </>
   )
-}
+};
 
-export default App
+export default App;
