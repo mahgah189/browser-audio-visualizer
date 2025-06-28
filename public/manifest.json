@@ -3,7 +3,27 @@
   "description": "A Chrome extension to visualize browser audio",
   "version": "0.1",
   "manifest_version": 3,
+  "permissions": [
+    "tabCapture",
+    "scripting",
+    "offscreen",
+    "tabs"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
   "action": {
-    "default_popup": "index.html"
-  }
+    "default_title": "Click to capture"
+  },
+  "background": {
+    "service_worker": "service-worker.js",
+    "type": "module"
+  },
+  "offscreen_documents": [
+    {
+      "url": "offscreen.html",
+      "reasons": ["USER_MEDIA"],
+      "justification": "Capturing and visualizing audio from browser tabs"
+    }
+  ]
 }
