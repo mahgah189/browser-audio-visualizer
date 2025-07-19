@@ -9,8 +9,8 @@ const generateShadowDom = () => {
   domContainer.style.top = "0";
   domContainer.style.right = "0";
   domContainer.style.zIndex = "999999";
-  domContainer.style.width = "100px";
-  domContainer.style.height = "100px";
+  domContainer.style.width = "100vw";
+  domContainer.style.height = "100vh";
   domContainer.style.pointerEvents = "none";
 
   const shadowRoot = domContainer.attachShadow({ mode: "open"});
