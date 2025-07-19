@@ -1,8 +1,12 @@
 console.log("[service-worker] running");
-console.log("chrome.offscreen:", chrome.offscreen);
 
 chrome.action.onClicked.addListener(async (tab) => {
   console.log('[service-worker] icon clicked');
+
+  await chrome.scripting.executeScript({
+    target: { tabId: tab.id },
+    files: ["content.js"]
+  });
 
   // check contexts for an offscreen document
   const getContextsAsync = () => {
@@ -41,13 +45,21 @@ chrome.action.onClicked.addListener(async (tab) => {
     targetTabId: tab.id
   });
 
-  console.log(streamId);
-
-  chrome.runtime.sendMessage({
-    type: "start-recording",
-    target: "offscreen",
-    data: streamId
-  });
+  chrome.runtime.sendMessage(
+    {
+      type: 'start-recording',
+      target: 'offscreen',
+      data: streamId
+    },
+    (response) => {
+      const err = chrome.runtime.lastError;
+      if (err) {
+        console.error('[service-worker] Message failed:', err.message);
+      } else {
+        console.log('[service-worker] Message acknowledged:', response);
+      }
+    }
+  );
 });
 
 console.log('[service-worker] loaded');

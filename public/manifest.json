@@ -7,7 +7,8 @@
     "tabCapture",
     "scripting",
     "offscreen",
-    "tabs"
+    "tabs",
+    "activeTab"
   ],
   "host_permissions": [
     "<all_urls>"
@@ -19,6 +20,12 @@
     "service_worker": "service-worker.js",
     "type": "module"
   },
+  "web_accessible_resources": [
+    {
+      "resources": ["react-shadow-bundle.js"],
+      "matches": ["<all_urls>"]
+    }
+  ],
   "offscreen_documents": [
     {
       "url": "offscreen.html",

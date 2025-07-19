@@ -3,8 +3,11 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.jsx";
 
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-);
+const shadowRoot = document.getElementById("visualizer-shadow-root")?.shadowRoot;
+const mount = shadowRoot?.getElementById("react-shadow-root");
+
+if (mount) {
+  createRoot(shadowRoot).render(<App />);
+} else {
+  console.error("React mount point not found");
+}
