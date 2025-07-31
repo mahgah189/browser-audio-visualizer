@@ -14,23 +14,7 @@
     "<all_urls>"
   ],
   "action": {
-    "default_title": "Click to capture"
-  },
-  "background": {
-    "service_worker": "service-worker.js",
-    "type": "module"
-  },
-  "web_accessible_resources": [
-    {
-      "resources": ["react-shadow-bundle.js"],
-      "matches": ["<all_urls>"]
-    }
-  ],
-  "offscreen_documents": [
-    {
-      "url": "offscreen.html",
-      "reasons": ["USER_MEDIA"],
-      "justification": "Capturing and visualizing audio from browser tabs"
-    }
-  ]
+    "default_title": "Browser Audio Visualizer",
+    "default_popup": "popup.html"
+  }
 }

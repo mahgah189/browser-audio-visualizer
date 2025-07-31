@@ -1,68 +1,79 @@
-console.log("[service-worker] running");
+// console.log("[service-worker] running");
 
-chrome.action.onClicked.addListener(async (tab) => {
-  console.log('[service-worker] icon clicked');
+// chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+//   if (message.type === "get-stream-id") {
+//     chrome.tabs.query({ active: true, currentWindow: true }, async ([tab]) => {
+//       const streamId = await chrome.tabCapture.getMediaStreamId({
+//         targetTabId: tab.id
+//       });
+//       sendResponse({ streamId });
+//     });
+//   }
+// });
 
-  await chrome.scripting.executeScript({
-    target: { tabId: tab.id },
-    files: ["content.js"]
-  });
+// chrome.action.onClicked.addListener(async (tab) => {
+//   console.log('[service-worker] icon clicked');
 
-  // check contexts for an offscreen document
-  const getContextsAsync = () => {
-    return new Promise((resolve) => {
-      chrome.runtime.getContexts({}, resolve);
-    });
-  }
+//   await chrome.scripting.executeScript({
+//     target: { tabId: tab.id },
+//     files: ["content.js"]
+//   });
 
-  const existingContexts = await getContextsAsync();
-  let recording = false;
+//   // check contexts for an offscreen document
+//   // const getContextsAsync = () => {
+//   //   return new Promise((resolve) => {
+//   //     chrome.runtime.getContexts({}, resolve);
+//   //   });
+//   // }
 
-  // return true if an offscreen document was found
-  const offscreenDocument = existingContexts.find((context) => {
-    return context.contextType === "OFFSCREEN_DOCUMENT";
-  });
+//   // const existingContexts = await getContextsAsync();
+//   // let recording = false;
 
-  if (!offscreenDocument) {
-    await chrome.offscreen.createDocument({
-      url: "offscreen.html",
-      reasons: ["USER_MEDIA"],
-      justification: "Capturing audio from chrome.tabCapture API"
-    });
-  } else {
-    recording = offscreenDocument.documentUrl.endsWith("#recording");
-  }
+//   // // return true if an offscreen document was found
+//   // const offscreenDocument = existingContexts.find((context) => {
+//   //   return context.contextType === "OFFSCREEN_DOCUMENT";
+//   // });
 
-  if (recording) {
-    chrome.runtime.sendMessage({
-      type: "stop-recording",
-      target: "offscreen"
-    });
-    return;
-  }
+//   // if (!offscreenDocument) {
+//   //   await chrome.offscreen.createDocument({
+//   //     url: "offscreen.html",
+//   //     reasons: ["USER_MEDIA"],
+//   //     justification: "Capturing audio from chrome.tabCapture API"
+//   //   });
+//   // } else {
+//   //   recording = offscreenDocument.documentUrl.endsWith("#recording");
+//   // }
 
-  const streamId = await chrome.tabCapture.getMediaStreamId({
-    targetTabId: tab.id
-  });
+//   // if (recording) {
+//   //   chrome.runtime.sendMessage({
+//   //     type: "stop-recording",
+//   //     target: "offscreen"
+//   //   });
+//   //   return;
+//   // }
 
-  chrome.runtime.sendMessage(
-    {
-      type: 'start-recording',
-      target: 'offscreen',
-      data: streamId
-    },
-    (response) => {
-      const err = chrome.runtime.lastError;
-      if (err) {
-        console.error('[service-worker] Message failed:', err.message);
-      } else {
-        console.log('[service-worker] Message acknowledged:', response);
-      }
-    }
-  );
-});
+//   // const streamId = await chrome.tabCapture.getMediaStreamId({
+//   //   targetTabId: tab.id
+//   // });
 
-console.log('[service-worker] loaded');
-chrome.runtime.onInstalled.addListener(() => {
-  console.log('[service-worker] onInstalled fired');
-});
+//   // chrome.runtime.sendMessage(
+//   //   {
+//   //     type: 'start-recording',
+//   //     target: 'offscreen',
+//   //     data: streamId
+//   //   },
+//   //   (response) => {
+//   //     const err = chrome.runtime.lastError;
+//   //     if (err) {
+//   //       console.error('[service-worker] Message failed:', err.message);
+//   //     } else {
+//   //       console.log('[service-worker] Message acknowledged:', response);
+//   //     }
+//   //   }
+//   // );
+// });
+
+// console.log('[service-worker] loaded');
+// chrome.runtime.onInstalled.addListener(() => {
+//   console.log('[service-worker] onInstalled fired');
+// });
