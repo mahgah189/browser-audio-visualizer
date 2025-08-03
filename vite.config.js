@@ -10,7 +10,14 @@ export default defineConfig({
     rollupOptions: {
       input: {
         popup: resolve(__dirname, "popup.html"),
+        content: resolve(__dirname, "src/extension/content/content.js"),
       },
+      // this stops Vite from adding random hashes to the file outputs.
+      output: {
+        entryFileNames: "[name].js",
+        chunkFileNames: "[name].js", 
+        assetFileNames: "[name].[ext]",
+      }
     },
   },
 });
