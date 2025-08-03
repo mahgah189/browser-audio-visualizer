@@ -49,7 +49,9 @@ const openShadowModal = () => {
     const script = document.createElement("script");
     script.src = chrome.runtime.getURL("react-shadow-bundle.js");
     script.type = "module";
-    document.head.appendChild(script);
+    setTimeout(() => {
+      document.head.appendChild(script);
+    }, 0);
   }
 };
 

@@ -13,6 +13,15 @@
   "host_permissions": [
     "<all_urls>"
   ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "react-shadow-bundle.js",
+        "client.js"
+      ],
+      "matches": ["<all_urls>"]
+    }
+  ],
   "action": {
     "default_title": "Browser Audio Visualizer",
     "default_popup": "popup.html"
