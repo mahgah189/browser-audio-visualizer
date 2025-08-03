@@ -11,6 +11,7 @@ export default defineConfig({
       input: {
         popup: resolve(__dirname, "popup.html"),
         content: resolve(__dirname, "src/extension/content/content.js"),
+        "react-shadow-bundle": resolve(__dirname, "src/shadow-main.jsx"),
       },
       // this stops Vite from adding random hashes to the file outputs.
       output: {

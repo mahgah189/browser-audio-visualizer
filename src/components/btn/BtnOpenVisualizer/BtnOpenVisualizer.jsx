@@ -16,12 +16,6 @@ function BtnOpenVisualizer(props) {
         target: { tabId: tab.id },
         files: ["content.js"]
       });
-      console.log("script executed");
-
-      await new Promise(resolve => setTimeout(resolve, 100));
-      
-      // Wait longer for script to initialize
-      await new Promise(resolve => setTimeout(resolve, 1000));
 
       const response = await chrome.tabs.sendMessage(tab.id, { action: "openVisualizer" });
       console.log("the response", response);

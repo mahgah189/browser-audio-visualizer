@@ -1,16 +1,10 @@
-// import React from "react";
-// import { createRoot } from "react-dom/client";
-// import VisualizerContainer from "/src/components/visualizer/VisualizerContainer/VisualizerContainer.jsx";
-
 console.log('Content script loaded successfully!');
 
 let shadowRoot = null;
-// let reactRoot = null;
 
 chrome.runtime.onMessage.addListener((message, sender, response) => {
   if (message.action === "openVisualizer") {
     openShadowModal();
-    sendResponse({ success: "true" });
   }
   return true;
 });
@@ -48,23 +42,21 @@ const openShadowModal = () => {
         }
       </style>
       <div class="modal-overlay">
-        <div id="react-container"></div>
+        <div id="react-shadow-root"></div>
       </div>
     `;
 
-    // We're using querySelector because Shadow DOMs don't have access to getElementById.
-    // const container = shadowRoot.querySelector("#react-container");
-    // reactRoot = createRoot(container);
-    // reactRoot.render(<VisualizerContainer />);
+    const script = document.createElement("script");
+    script.src = chrome.runtime.getURL("react-shadow-bundle.js");
+    script.type = "module";
+    document.head.appendChild(script);
   }
 };
 
 // const closeModal = () => {
-//   if (reactRoot) {
+//   if (shadowRoot) {
 //     const hostElement = document.querySelector("#visualizer-shadow-host");
 
-//     reactRoot.unmount();
-//     reactRoot = null;
 //     hostElement.remove();
 //     shadowRoot = null;
 //   }

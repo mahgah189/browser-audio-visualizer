@@ -5,7 +5,7 @@ import "./VisualizerContainer.css";
 function VisualizerContainer() {
   return (
     <div>
-
+      <p>Hello World</p>
     </div>
   )
 };
