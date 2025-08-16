@@ -11,7 +11,7 @@ chrome.runtime.onMessage.addListener((message, sender, response) => {
 
 const openShadowModal = () => {
   if (shadowRoot) {
-    return;
+    closeModal();
   } else {
     const hostElement = document.createElement("div");
     hostElement.id = "visualizer-shadow-host";
@@ -49,17 +49,14 @@ const openShadowModal = () => {
     const script = document.createElement("script");
     script.src = chrome.runtime.getURL("react-shadow-bundle.js");
     script.type = "module";
-    setTimeout(() => {
-      document.head.appendChild(script);
-    }, 0);
+    document.head.appendChild(script);
   }
 };
 
-// const closeModal = () => {
-//   if (shadowRoot) {
-//     const hostElement = document.querySelector("#visualizer-shadow-host");
-
-//     hostElement.remove();
-//     shadowRoot = null;
-//   }
-// };
+const closeModal = () => {
+  if (shadowRoot) {
+    const hostElement = document.querySelector("#visualizer-shadow-host");
+    hostElement.remove();
+    shadowRoot = null;
+  }
+};

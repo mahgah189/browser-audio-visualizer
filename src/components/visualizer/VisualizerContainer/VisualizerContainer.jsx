@@ -4,8 +4,8 @@ import "./VisualizerContainer.css";
 
 function VisualizerContainer() {
   return (
-    <div>
-      <p>Hello World</p>
+    <div className="visualizer-container">
+      <p>Hellow World</p>
     </div>
   )
 };
