@@ -1,4 +1,4 @@
-const btnOpenVisualizer = document.getElementById("btn-open-visualizer");
+const btnOpenVisualizer = document.getElementById("btn-open-side-panel");
 
 btnOpenVisualizer.addEventListener("click", async() => {
   const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
